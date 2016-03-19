@@ -11,3 +11,8 @@ NUTZ一键脚手架
 		</repository>
 	</repositories>
 ```
+
+构建命令
+```
+mvn eclipse:eclipse -Dwtpversion=1.0
+```
