@@ -24,19 +24,25 @@ layout("/layout/default.html",{"menu":[nameSpace,"setting_list"],"breadcrumbs":[
 		</tr>
 		<tr class="center">
 			<th>id</th>
-			<th>时间</th>
-			<th>用户</th>
-			<th>ip</th>
+			<th>配置名</th>
+			<th>配置值</th>
+			<th>描述</th>
+			<th>操作</th>
 		</tr>
 	</thead>
 
 	<tbody>
-		<!--# for(log in obj.data.pager.entities){ #-->
+		<!--# for(config in obj.data.pager.entities){ #-->
 		<tr>
-			<td>${log.id!}</td>
-			<td>${log.loginTime,"yyyy-MM-dd HH:mm:ss"}</td>
-			<td>${log.account!}</td>
-			<td>${log.ip!}</td>
+			<td>${config.id!}</td>
+			<td>${config.name!}</td>
+			<td>${config.value!}</td>
+			<td>${config.description!}</td>
+			<td><a class="btn btn-xs btn-info" href="${base}/setting/edit/${config.id!}"> <i class="ace-icon fa fa-pencil bigger-120"></i> 编辑
+			</a>
+				<button class="btn btn-xs btn-danger btn-delete" data-url='/setting/delete' data-id='${config.id!}'>
+					<i class="ace-icon fa fa-trash-o bigger-120"></i> 删除
+				</button></td>
 		</tr>
 		<!--# } #-->
 	</tbody>

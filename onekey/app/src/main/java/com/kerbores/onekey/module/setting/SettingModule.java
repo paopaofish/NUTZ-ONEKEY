@@ -5,6 +5,7 @@ import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.GET;
 import org.nutz.mvc.annotation.Ok;
+import org.nutz.mvc.annotation.POST;
 import org.nutz.mvc.annotation.Param;
 
 import com.kerbores.nutz.module.base.AbstractBaseModule;
@@ -46,11 +47,51 @@ public class SettingModule extends AbstractBaseModule {
 	}
 
 	@At
+	@Ok("beetl:pages/setting/list.html")
+	@RequiresRoles("admin")
+	public Result search(@Param("key") String key, @Param(value = "page", df = "1") int page) {
+		page = _fixPage(page);
+		key = _fixSearchKey(key);
+		Pager<Config> pager = configService.searchByKeyAndPage(key, page, "name", "description");
+		pager.setUrl(_base() + "/setting/search");
+		pager.addParas("key", key);
+		return Result.success().addData("pager", pager);
+	}
+
+	@At
 	@GET
 	@Ok("beetl:pages/setting/add_edit.html")
 	@RequiresRoles("admin")
 	public Result add() {
 		return Result.success();
+	}
+
+	@At("/edit/*")
+	@GET
+	@Ok("beetl:pages/setting/add_edit.html")
+	@RequiresRoles("admin")
+	public Result edit(int id) {
+		return Result.success().addData("config", configService.fetch(id));
+	}
+
+	@At
+	@POST
+	@RequiresRoles("admin")
+	public Result edit(@Param("..") Config config) {
+		return configService.update(config) == 1 ? Result.success() : Result.fail("更新失败!");
+	}
+
+	@At
+	@POST
+	@RequiresRoles("admin")
+	public Result add(@Param("..") Config config) {
+		return configService.save(config) == null ? Result.fail("添加配置失败") : Result.success();
+	}
+
+	@At("/delete/*")
+	@RequiresRoles("admin")
+	public Result delete(int id) {
+		return configService.delete(id) == 1 ? Result.success() : Result.fail("删除配置失败!");
 	}
 
 }

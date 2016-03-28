@@ -14,19 +14,19 @@ layout("/layout/default.html",{"menu":[nameSpace,"setting_list"],"breadcrumbs":[
 					<div class="form-group ">
 						<label for="用户名" class="control-label col-lg-3">配置名 : </label>
 						<div class="col-lg-9">
-							<input class="form-control" type="text" placeholder="请输入配置名称" name="name" data-type='required' data-error='请输入配置名称' value="${obj.data.user.name!}" ${obj.data.user==null? "":"disabled"} />
+							<input class="form-control" type="text" placeholder="请输入配置名称" name="name" data-type='required' data-error='请输入配置名称' value="${obj.data.config.name!}"  />
 						</div>
 					</div>
 					<div class="form-group ">
 						<label class="control-label col-lg-3"> 配置值 : </label>
 						<div class="col-lg-9">
-							<input class="form-control" type="text" placeholder="请输入用户配置值" name="realName" data-type='required' data-error='请输入用户配置值' value="${obj.data.user.realName!}">
+							<input class="form-control" type="text" placeholder="请输入用户配置值" name="value" data-type='required' data-error='请输入用户配置值' value="${obj.data.config.value!}">
 						</div>
 					</div>
 					<div class="form-group ">
 						<label class="control-label col-lg-3"> 配置说明 : </label>
 						<div class="col-lg-9">
-							<textarea rows="10" name="content" class="form-control" placeholder="请填写配置说明"></textarea>
+							<textarea rows="10" id="description" name="description" class="form-control" placeholder="请填写配置说明">${obj.data.config.description!}</textarea>
 						</div>
 					</div>
 					<input type="hidden" id="id" name="id" value="${obj.data.config.id!}">
@@ -34,7 +34,7 @@ layout("/layout/default.html",{"menu":[nameSpace,"setting_list"],"breadcrumbs":[
 						<button type="button" class="btn btn-sm btn-primary" onclick="save(this)">
 							<i class="fa fa-save"></i> 提交
 						</button>
-						<a href="${base}/user/list" class="btn btn-sm btn-default"> <i class="fa fa-undo"></i> 返回
+						<a href="${base}/setting/list" class="btn btn-sm btn-default"> <i class="fa fa-undo"></i> 返回
 						</a>
 					</div>
 				</form>
@@ -47,32 +47,30 @@ layout("/layout/default.html",{"menu":[nameSpace,"setting_list"],"breadcrumbs":[
 <script type="text/javascript">
 	var editor;
 	KindEditor.ready(function(K) {
-		editor = K.create('textarea[name="content"]', {
+		editor = K.create('textarea[name="description"]', {
 			uploadJson : getRootPath() + '/kind/upload'
 		});
 	})
 
 	function save(btn) {
-		$("input[name='status']").val($("input[name='statusSwitch']")[0].checked ? "ACTIVED" : "DISABLED");//将开关状态刷回表单进行提交
-		if ($('#addUserForm').find('input').validation()) {//验证表单
+		$('#description').val(editor.html());
+		if ($('#configForm').find('input').validation()) {//验证表单
 			if ($('#id').val()) {
-				$.post(getRootPath() + '/user/edit', $('#addUserForm').serialize(), function(result) {
+				$.post(getRootPath() + '/setting/edit', $('#configForm').serialize(), function(result) {
 					if (result.operationState == 'SUCCESS') {
-						location.href = getRootPath() + "/user/list";
-					} else {
-						validationFail(result.data.reason, btn);
-					}
-				}, 'json');
-			} else if ($("input[name='password']").val() === $("input[name='rePassword']").val()) {
-				$.post(getRootPath() + '/user/add', $('#addUserForm').serialize(), function(result) {
-					if (result.operationState == 'SUCCESS') {
-						location.href = getRootPath() + "/user/list";
+						location.href = getRootPath() + "/setting/list";
 					} else {
 						validationFail(result.data.reason, btn);
 					}
 				}, 'json');
 			} else {
-				validationFail("两次输入的密码不一致", $("input[name='rePassword']"));
+				$.post(getRootPath() + '/setting/add', $('#configForm').serialize(), function(result) {
+					if (result.operationState == 'SUCCESS') {
+						location.href = getRootPath() + "/setting/list";
+					} else {
+						validationFail(result.data.reason, btn);
+					}
+				}, 'json');
 			}
 		}
 	}
