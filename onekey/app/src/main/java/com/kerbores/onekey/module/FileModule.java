@@ -7,7 +7,6 @@ import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.lang.Streams;
 import org.nutz.lang.Strings;
 import org.nutz.lang.util.NutMap;
-import org.nutz.mvc.Mvcs;
 import org.nutz.mvc.annotation.AdaptBy;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Param;
@@ -74,7 +73,6 @@ public class FileModule extends AbstractBaseModule {
 	@At("/kind/upload")
 	@AdaptBy(type = UploadAdaptor.class, args = { "${app.root}/WEB-INF/tmp" })
 	public NutMap upload(TempFile imgFile) throws IOException {
-		System.err.println(Mvcs.getReq().getParameterMap().keySet());
 		String key = uploader.upload(Streams.readBytes(imgFile.getInputStream()));
 		if (Strings.isBlank(key)) {
 			return NutMap.NEW().addv("error", 1).addv("message", "上传失败");
