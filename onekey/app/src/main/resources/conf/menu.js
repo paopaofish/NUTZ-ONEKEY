@@ -121,4 +121,54 @@
 		level : 1,
 		icon : "lock"
 	} ]
+}, {
+	name : "settings",
+	description : "配置管理",
+	menu : true,
+	url : null,
+	hilightKey : "settings",
+	level : 0,
+	icon : "cogs",
+	sub : [ {
+		name : "setting_list",
+		description : "配置列表",
+		menu : true,
+		url : "setting/list",
+		hilightKey : "setting_list",
+		level : 1,
+		icon : "lock",
+		sub : [ {
+			name : "setting_add",
+			description : "添加配置",
+			menu : false,
+			url : "setting/add",
+			hilightKey : "setting_list",
+			level : 2,
+			icon : "plus-circle",
+		}, {
+			name : "setting_edit",
+			description : "编辑配置",
+			menu : false,
+			url : "setting/edit",
+			hilightKey : "setting_list",
+			level : 2,
+			icon : "pencil",
+		}, {
+			name : "setting_delete",
+			description : "删除配置",
+			menu : false,
+			url : "setting/delete",
+			hilightKey : "setting_list",
+			level : 2,
+			icon : "trash-o",
+		}, {
+			name : "setting_detail",
+			description : "配置详情",
+			menu : false,
+			url : "setting/detail",
+			hilightKey : "setting_list",
+			level : 2,
+			icon : "info-circle",
+		} ]
+	} ]
 } ]

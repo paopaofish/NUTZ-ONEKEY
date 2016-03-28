@@ -83,7 +83,7 @@ public class MenuTag extends Tag {
 			return "<li class='" + (active(menu) ? "active open" : "") + "'><a href='#' class='dropdown-toggle'><i class='menu-icon fa fa-" + menu.getIcon()
 					+ "'></i><span class='menu-text'> " + menu.getDisplay() + " </span><b class='arrow fa fa-angle-down'></b></a><b class='arrow'></b>" + subMenu + "</li>";
 		} else {// 无子菜单
-			return "<li class='" + (active(menu) ? "active open" : "") + "'><a href='" + base + "/" + menu.getUrl() + "'><i class='menu-icon fa fa-" + menu.getIcon()
+			return "<li class='" + (active(menu) ? "active" : "") + "'><a href='" + base + "/" + menu.getUrl() + "'><i class='menu-icon fa fa-" + menu.getIcon()
 					+ "'></i><span class='menu-text'> " + menu.getDisplay() + " </span></a><b class='arrow'></b></li>";
 		}
 	}
