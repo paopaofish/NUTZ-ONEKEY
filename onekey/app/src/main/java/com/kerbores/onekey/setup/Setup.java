@@ -6,6 +6,7 @@ import java.util.Map;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.dao.util.Daos;
+import org.nutz.integration.quartz.NutQuartzCronJobFactory;
 import org.nutz.ioc.Ioc;
 import org.nutz.json.Json;
 import org.nutz.lang.ContinueLoop;
@@ -30,7 +31,6 @@ import com.kerbores.onkey.bean.acl.RolePermission;
 import com.kerbores.onkey.bean.acl.User;
 import com.kerbores.onkey.bean.acl.User.Status;
 import com.kerbores.onkey.bean.acl.UserRole;
-import com.kerbores.quartz.NutQuartzCronJobFactory;
 
 /**
  * @author Kerbores(kerbores@gmail.com)

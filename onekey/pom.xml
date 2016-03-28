@@ -83,18 +83,28 @@
 
 		<dependency>
 			<groupId>com.kerbores.nutz</groupId>
-			<artifactId>shiro</artifactId>
-			<version>2.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.kerbores.nutz</groupId>
 			<artifactId>gather</artifactId>
 			<version>2.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>org.nutz</groupId>
+			<artifactId>nutz-integration-shiro</artifactId>
+			<version>1.r.55-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.nutz</groupId>
+			<artifactId>nutz-integration-quartz</artifactId>
+			<version>1.r.55-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>com.kerbores.nutz</groupId>
-			<artifactId>quartz</artifactId>
+			<artifactId>qiniu</artifactId>
 			<version>2.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.nutz</groupId>
+			<artifactId>nutzwx</artifactId>
+			<version>1.r.55-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

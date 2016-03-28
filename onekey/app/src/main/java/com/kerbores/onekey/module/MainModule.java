@@ -26,7 +26,6 @@ import com.kerbores.onekey.ext.cache.Menus;
 import com.kerbores.onekey.setup.Setup;
 import com.kerbores.onkey.bean.Application.SessionKeys;
 import com.kerbores.onkey.bean.acl.User;
-import com.kerbores.shiro.ShiroActionFilter;
 import com.kerbores.utils.entries.Result;
 
 /**
@@ -36,11 +35,11 @@ import com.kerbores.utils.entries.Result;
  */
 @Modules(scanPackage = true)
 @IocBy(type = ComboIocProvider.class, args = { "*anno", "com.kerbores", "*tx",
-		"*js", "ioc", "*async", "*com.kerbores.quartz.QuartzIocLoader", "quartz" })
+		"*js", "ioc", "*async", "*quartz", "quartz" })
 @Views(BeetlViewMaker.class)
 @Fail("http:500")
 @Ok("json")
-@Filters({ @By(type = ShiroActionFilter.class, args = "/"), @By(type = CheckSession.class, args = { SessionKeys.USER_KEY, "/" }) })
+@Filters({ @By(type = CheckSession.class, args = { SessionKeys.USER_KEY, "/" }) })
 @SetupBy(Setup.class)
 public class MainModule extends AbstractBaseModule {
 
