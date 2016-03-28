@@ -1,6 +1,7 @@
 package com.kerbores.onekey.module.apm;
 
 import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.nutz.ioc.impl.PropertiesProxy;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Filters;
@@ -31,6 +32,9 @@ public class APMModule extends AbstractBaseModule {
 
 	@Inject
 	APMAlarmService apmAlarmService;
+	
+	@Inject
+	PropertiesProxy config;
 
 	/*
 	 * (non-Javadoc)
@@ -46,7 +50,7 @@ public class APMModule extends AbstractBaseModule {
 	@Ok("beetl:pages/apm/dashboard.html")
 	@RequiresRoles("admin")
 	public Result dashboard() {
-		return Result.success().addData(Gathers.all());
+		return Result.success().addData(Gathers.all()).addData("config",config);
 	}
 
 	@At

@@ -8,6 +8,7 @@ import org.nutz.dao.Dao;
 import org.nutz.dao.util.Daos;
 import org.nutz.integration.quartz.NutQuartzCronJobFactory;
 import org.nutz.ioc.Ioc;
+import org.nutz.ioc.impl.PropertiesProxy;
 import org.nutz.json.Json;
 import org.nutz.lang.ContinueLoop;
 import org.nutz.lang.Each;
@@ -15,6 +16,7 @@ import org.nutz.lang.ExitLoop;
 import org.nutz.lang.Files;
 import org.nutz.lang.Lang;
 import org.nutz.lang.LoopException;
+import org.nutz.lang.Strings;
 import org.nutz.lang.util.NutMap;
 import org.nutz.log.Logs;
 import org.nutz.mvc.NutConfig;
@@ -31,6 +33,7 @@ import com.kerbores.onkey.bean.acl.RolePermission;
 import com.kerbores.onkey.bean.acl.User;
 import com.kerbores.onkey.bean.acl.User.Status;
 import com.kerbores.onkey.bean.acl.UserRole;
+import com.kerbores.onkey.bean.config.Config;
 
 /**
  * @author Kerbores(kerbores@gmail.com)
@@ -76,9 +79,49 @@ public class Setup implements org.nutz.mvc.Setup {
 		permissionService = ioc.get(PermissionService.class);
 
 		rolePermissionService = ioc.get(RolePermissionService.class);
-		Daos.createTablesInPackage(dao, "com.kerbores", false);
-		Daos.migration(dao, "com.kerbores", true, true, true);
-		initACL(config.getIoc());
+
+		Daos.createTablesInPackage(dao, "com.kerbores", false);// 创建表
+		Daos.migration(dao, "com.kerbores", true, true, true);// 更改表
+
+		initACL(config.getIoc());// 初始化访问控制数据
+
+		writeConfigs(config.getIoc());// 写配置
+	}
+
+	/**
+	 * @author 王贵源
+	 * @param ioc
+	 */
+	private void writeConfigs(Ioc ioc) {
+		// 数据库值为准没有的情况下写默认值
+		PropertiesProxy config = ioc.get(PropertiesProxy.class, "config");
+		Dao dao = ioc.get(Dao.class);
+		List<Config> installedConfigs = dao.query(Config.class, null);
+		for (Config c : installedConfigs) {
+			// 报警相关
+			if (Strings.equals(c.getName(), "cpu.alarm.percent")) {
+				config.set("cpu.alarm.percent", c.getValue());
+			}
+			if (Strings.equals(c.getName(), "jvm.alarm.percent")) {
+				config.set("jvm.alarm.percent", c.getValue());
+			}
+			if (Strings.equals(c.getName(), "ram.alarm.percent")) {
+				config.set("ram.alarm.percent", c.getValue());
+			}
+			if (Strings.equals(c.getName(), "swap.alarm.percent")) {
+				config.set("swap.alarm.percent", c.getValue());
+			}
+			if (Strings.equals(c.getName(), "disk.alarm.percent")) {
+				config.set("disk.alarm.percent", c.getValue());
+			}
+			if (Strings.equals(c.getName(), "network.alarm.percent")) {
+				config.set("network.alarm.percent", c.getValue());
+			}
+			if (Strings.equals(c.getName(), "alarm.listener")) {
+				config.set("alarm.listener", c.getValue());
+			}
+			// 报警相关
+		}
 	}
 
 	/**

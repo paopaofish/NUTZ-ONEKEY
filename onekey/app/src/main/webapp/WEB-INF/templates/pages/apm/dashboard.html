@@ -82,11 +82,11 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 								<td>当前使用 <i class="red" id="cpu">${obj.data.cpu.total.usage!}%</i>
 								</td>
 
-								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" /> 发送 <select multiple="" class="chosen-select form-control tag-input-style"
-									data-placeholder="选择告警方式">
-										<option value="AL">邮件</option>
-										<option value="AK">短信</option>
-										<option value="AZ">微信</option>
+								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" value="${obj.data.config['cpu.alarm.percent']}" /> 发送 <select multiple=""
+									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
+										<option value="EMAIL">邮件</option>
+										<option value="SMS">短信</option>
+										<option value="WECHAT">微信</option>
 								</select> 告警
 									<button class="btn btn-sm btn-primary">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
@@ -100,11 +100,11 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 								<td>当前使用 <i class="red" id="jvm">${obj.data.memory.jvm.usage!}%</i>
 								</td>
 
-								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" /> 发送 <select multiple="" class="chosen-select form-control tag-input-style"
-									data-placeholder="选择告警方式">
-										<option value="AL">邮件</option>
-										<option value="AK">短信</option>
-										<option value="AZ">微信</option>
+								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" value="${obj.data.config['jvm.alarm.percent']}" /> 发送 <select multiple=""
+									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
+										<option value="EMAIL">邮件</option>
+										<option value="SMS">短信</option>
+										<option value="WECHAT">微信</option>
 								</select> 告警
 									<button class="btn btn-sm btn-primary">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
@@ -118,11 +118,11 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 								<td>当前使用 <i class="red" id="ram">${obj.data.memory.ram.usage!}%</i>
 								</td>
 
-								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" /> 发送 <select multiple="" class="chosen-select form-control tag-input-style"
-									data-placeholder="选择告警方式">
-										<option value="AL">邮件</option>
-										<option value="AK">短信</option>
-										<option value="AZ">微信</option>
+								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" value="${obj.data.config['ram.alarm.percent']}" /> 发送 <select multiple=""
+									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
+										<option value="EMAIL">邮件</option>
+										<option value="SMS">短信</option>
+										<option value="WECHAT">微信</option>
 								</select> 告警
 									<button class="btn btn-sm btn-primary">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
@@ -136,11 +136,11 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 								<td>当前使用 <i class="red" id="swap">${obj.data.memory.swap.usage!}%</i>
 								</td>
 
-								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" /> 发送 <select multiple="" class="chosen-select form-control tag-input-style"
-									data-placeholder="选择告警方式">
-										<option value="AL">邮件</option>
-										<option value="AK">短信</option>
-										<option value="AZ">微信</option>
+								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" value="${obj.data.config['swap.alarm.percent']}" /> 发送 <select multiple=""
+									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
+										<option value="EMAIL">邮件</option>
+										<option value="SMS">短信</option>
+										<option value="WECHAT">微信</option>
 								</select> 告警
 									<button class="btn btn-sm btn-primary">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
@@ -154,11 +154,11 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 								<td>当前使用 <i class="red">95%</i>
 								</td>
 
-								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" /> 发送 <select multiple="" class="chosen-select form-control tag-input-style"
-									data-placeholder="选择告警方式">
-										<option value="AL">邮件</option>
-										<option value="AK">短信</option>
-										<option value="AZ">微信</option>
+								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" value="${obj.data.config['disk.alarm.percent']}" /> 发送 <select multiple=""
+									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
+										<option value="EMAIL">邮件</option>
+										<option value="SMS">短信</option>
+										<option value="WECHAT">微信</option>
 								</select> 告警
 									<button class="btn btn-sm btn-primary">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
@@ -172,11 +172,11 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 								<td>当前使用 <i class="red" id="network">${obj.data.network.rate!} M/s</i>
 								</td>
 
-								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" /> 发送 <select multiple="" class="chosen-select form-control tag-input-style"
-									data-placeholder="选择告警方式">
-										<option value="AL">邮件</option>
-										<option value="AK">短信</option>
-										<option value="AZ">微信</option>
+								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" value="${obj.data.config['network.alarm.percent']}" /> 发送 <select multiple=""
+									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
+										<option value="EMAIL">邮件</option>
+										<option value="SMS">短信</option>
+										<option value="WECHAT">微信</option>
 								</select> 告警
 									<button class="btn btn-sm btn-primary">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
