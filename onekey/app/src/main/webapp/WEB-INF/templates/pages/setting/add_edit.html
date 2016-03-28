@@ -1,6 +1,7 @@
 <!--# 
 layout("/layout/default.html",{"menu":[nameSpace,"setting_list"],"breadcrumbs":[{"name":"配置列表",url:"setting/list"},{"name":(obj.data.config==null?"添加配置":"编辑配置")}]}){ 
  #-->
+<link rel="stylesheet" href="${base!}/resources/kindeditor/themes/default/default.css" />
 <div class="space-4"></div>
 <div class="row">
 	<div class="col-md-8 col-md-offset-2 col-sm-12">
@@ -25,7 +26,7 @@ layout("/layout/default.html",{"menu":[nameSpace,"setting_list"],"breadcrumbs":[
 					<div class="form-group ">
 						<label class="control-label col-lg-3"> 配置说明 : </label>
 						<div class="col-lg-9">
-							<textarea rows="10" class="form-control" placeholder="请填写配置说明"></textarea>
+							<textarea rows="10" name="content" class="form-control" placeholder="请填写配置说明"></textarea>
 						</div>
 					</div>
 					<input type="hidden" id="id" name="id" value="${obj.data.config.id!}">
@@ -41,7 +42,16 @@ layout("/layout/default.html",{"menu":[nameSpace,"setting_list"],"breadcrumbs":[
 		</div>
 	</div>
 </div>
+<script charset="utf-8" src="${base!}/resources/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="${base!}/resources/kindeditor/lang/zh_CN.js"></script>
 <script type="text/javascript">
+	var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="content"]', {
+			uploadJson : getRootPath() + '/kind/upload'
+		});
+	})
+
 	function save(btn) {
 		$("input[name='status']").val($("input[name='statusSwitch']")[0].checked ? "ACTIVED" : "DISABLED");//将开关状态刷回表单进行提交
 		if ($('#addUserForm').find('input').validation()) {//验证表单

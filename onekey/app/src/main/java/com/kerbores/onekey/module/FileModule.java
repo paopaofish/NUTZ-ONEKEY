@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.lang.Streams;
+import org.nutz.lang.Strings;
 import org.nutz.lang.util.NutMap;
+import org.nutz.mvc.Mvcs;
 import org.nutz.mvc.annotation.AdaptBy;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Param;
@@ -29,7 +31,6 @@ import com.kerbores.utils.entries.Result;
  * @time 2016年3月24日 下午1:46:46
  *
  */
-@At
 public class FileModule extends AbstractBaseModule {
 
 	@Inject
@@ -70,11 +71,15 @@ public class FileModule extends AbstractBaseModule {
 		return Result.success().addData("data", data);
 	}
 
-	public static void main(String[] args) throws IOException {
-		String host = "www.baidu.com";
-		Process p = Runtime.getRuntime().exec("ping -c 1 " + host);
-
-		System.err.println(Streams.read(Streams.utf8r(p.getInputStream())));
+	@At("/kind/upload")
+	@AdaptBy(type = UploadAdaptor.class, args = { "${app.root}/WEB-INF/tmp" })
+	public NutMap upload(TempFile imgFile) throws IOException {
+		System.err.println(Mvcs.getReq().getParameterMap().keySet());
+		String key = uploader.upload(Streams.readBytes(imgFile.getInputStream()));
+		if (Strings.isBlank(key)) {
+			return NutMap.NEW().addv("error", 1).addv("message", "上传失败");
+		}
+		return NutMap.NEW().addv("error", 0).addv("url", uploader.privateUrl(key));
 	}
 
 }
