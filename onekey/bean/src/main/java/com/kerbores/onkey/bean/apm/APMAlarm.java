@@ -50,6 +50,54 @@ public class APMAlarm extends Entity {
 	@Comment("报警 ip")
 	private String ip;
 
+	@Column("alarm_title")
+	@Comment("报警标题")
+	private String title;
+
+	@Column("alarm_device")
+	@Comment("报警设备")
+	private String device;
+
+	@Column("alarm_usage")
+	@Comment(" 设备使用情况")
+	private double usage;
+
+	@Column("alarm_alarm_point")
+	@Comment("设备告警点")
+	private int alarm;
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDevice() {
+		return device;
+	}
+
+	public void setDevice(String device) {
+		this.device = device;
+	}
+
+	public double getUsage() {
+		return usage;
+	}
+
+	public void setUsage(double usage) {
+		this.usage = usage;
+	}
+
+	public int getAlarm() {
+		return alarm;
+	}
+
+	public void setAlarm(int alarm) {
+		this.alarm = alarm;
+	}
+
 	public String getIp() {
 		return ip;
 	}
@@ -91,7 +139,7 @@ public class APMAlarm extends Entity {
 	}
 
 	public static enum Type {
-		SLOW, MEM, DISK, CPU, NETWORK
+		SLOW, MEM, DISK, CPU, NETWORK;
 	}
 
 }

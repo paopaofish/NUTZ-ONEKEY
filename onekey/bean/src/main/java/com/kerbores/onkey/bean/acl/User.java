@@ -134,7 +134,6 @@ public class User extends Entity {
 	@ColDefine(width = 200)
 	private String headKey;
 
-	@SuppressWarnings("unused")
 	private String headUrl;
 
 	@Column("u_create_time")
@@ -148,6 +147,22 @@ public class User extends Entity {
 	@Column("u_type")
 	@Comment("用户类型")
 	private Type userType = Type.PLATFORM;
+
+	@Column("u_openid")
+	@Comment("用户微信 openid")
+	private String openid;
+
+	public String getOpenid() {
+		return openid;
+	}
+
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+
+	public String getHeadUrl() {
+		return headUrl;
+	}
 
 	/**
 	 * @return the createTime
