@@ -78,13 +78,12 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 						<tbody>
 							<tr>
 								<td class="">CPU</td>
-
-								<td>当前使用 <i class="red" id="cpu">${obj.data.cpu.total.usage!}%</i>
+								<td>当前使用${obj.data.config['cpu.alarm.types']} <i class="red" id="cpu">${obj.data.cpu.total.usage!}%</i>
 								</td>
 
 								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" value="${obj.data.config['cpu.alarm.percent']}" /> 发送 <select multiple=""
 									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
-										<option value="EMAIL">邮件</option>
+										<option value="EMAIL"}>邮件</option>
 										<option value="SMS">短信</option>
 										<option value="WECHAT">微信</option>
 								</select> 告警
