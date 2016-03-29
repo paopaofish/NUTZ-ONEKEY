@@ -1,7 +1,5 @@
 package com.kerbores.onkey.bean.config;
 
-import java.net.SocketException;
-
 import org.nutz.dao.entity.annotation.ColDefine;
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
@@ -25,10 +23,6 @@ import com.kerbores.utils.db.data.Entity;
 @Table("tdb_sys_config")
 public class Config extends Entity {
 
-	public static void main(String[] args) throws SocketException {
-
-	}
-
 	@Name
 	@Column("cfg_key")
 	@Comment("配置键")
@@ -43,6 +37,25 @@ public class Config extends Entity {
 	@ColDefine(width = 250)
 	private String description;
 
+	@Column("cfg_installed")
+	@Comment("是否内置标识")
+	private boolean installed = true;
+
+	/**
+	 * @return the installed
+	 */
+	public boolean isInstalled() {
+		return installed;
+	}
+
+	/**
+	 * @param installed
+	 *            the installed to set
+	 */
+	public void setInstalled(boolean installed) {
+		this.installed = installed;
+	}
+
 	/**
 	 * @return the name
 	 */
@@ -51,7 +64,8 @@ public class Config extends Entity {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -65,7 +79,8 @@ public class Config extends Entity {
 	}
 
 	/**
-	 * @param value the value to set
+	 * @param value
+	 *            the value to set
 	 */
 	public void setValue(String value) {
 		this.value = value;
@@ -79,13 +94,11 @@ public class Config extends Entity {
 	}
 
 	/**
-	 * @param description the description to set
+	 * @param description
+	 *            the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
-	
 
 }
