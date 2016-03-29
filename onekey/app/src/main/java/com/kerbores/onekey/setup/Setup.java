@@ -102,20 +102,38 @@ public class Setup implements org.nutz.mvc.Setup {
 			if (Strings.equals(c.getName(), "cpu.alarm.percent")) {
 				config.set("cpu.alarm.percent", c.getValue());
 			}
+			if (Strings.equals(c.getName(), "cpu.alarm.types")) {
+				config.set("cpu.alarm.types", c.getValue());
+			}
 			if (Strings.equals(c.getName(), "jvm.alarm.percent")) {
 				config.set("jvm.alarm.percent", c.getValue());
+			}
+			if (Strings.equals(c.getName(), "jvm.alarm.types")) {
+				config.set("jvm.alarm.types", c.getValue());
 			}
 			if (Strings.equals(c.getName(), "ram.alarm.percent")) {
 				config.set("ram.alarm.percent", c.getValue());
 			}
+			if (Strings.equals(c.getName(), "ram.alarm.types")) {
+				config.set("ram.alarm.types", c.getValue());
+			}
 			if (Strings.equals(c.getName(), "swap.alarm.percent")) {
 				config.set("swap.alarm.percent", c.getValue());
+			}
+			if (Strings.equals(c.getName(), "swap.alarm.types")) {
+				config.set("swap.alarm.types", c.getValue());
 			}
 			if (Strings.equals(c.getName(), "disk.alarm.percent")) {
 				config.set("disk.alarm.percent", c.getValue());
 			}
+			if (Strings.equals(c.getName(), "disk.alarm.types")) {
+				config.set("disk.alarm.types", c.getValue());
+			}
 			if (Strings.equals(c.getName(), "network.alarm.percent")) {
 				config.set("network.alarm.percent", c.getValue());
+			}
+			if (Strings.equals(c.getName(), "network.alarm.types")) {
+				config.set("network.alarm.types", c.getValue());
 			}
 			if (Strings.equals(c.getName(), "alarm.listener")) {
 				config.set("alarm.listener", c.getValue());

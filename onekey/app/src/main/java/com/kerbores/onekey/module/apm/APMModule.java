@@ -1,8 +1,10 @@
 package com.kerbores.onekey.module.apm;
 
 import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.nutz.dao.Cnd;
 import org.nutz.ioc.impl.PropertiesProxy;
 import org.nutz.ioc.loader.annotation.Inject;
+import org.nutz.lang.util.NutMap;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Filters;
 import org.nutz.mvc.annotation.Ok;
@@ -10,7 +12,9 @@ import org.nutz.mvc.annotation.Param;
 
 import com.kerbores.nutz.module.base.AbstractBaseModule;
 import com.kerbores.onekey.biz.apm.APMAlarmService;
+import com.kerbores.onekey.biz.setting.ConfigService;
 import com.kerbores.onkey.bean.apm.APMAlarm;
+import com.kerbores.onkey.bean.config.Config;
 import com.kerbores.sigar.gathers.Gathers;
 import com.kerbores.utils.entries.Result;
 import com.kerbores.utils.web.pager.Pager;
@@ -32,9 +36,12 @@ public class APMModule extends AbstractBaseModule {
 
 	@Inject
 	APMAlarmService apmAlarmService;
-	
+
 	@Inject
 	PropertiesProxy config;
+
+	@Inject
+	ConfigService configService;
 
 	/*
 	 * (non-Javadoc)
@@ -50,7 +57,7 @@ public class APMModule extends AbstractBaseModule {
 	@Ok("beetl:pages/apm/dashboard.html")
 	@RequiresRoles("admin")
 	public Result dashboard() {
-		return Result.success().addData(Gathers.all()).addData("config",config);
+		return Result.success().addData(Gathers.all()).addData("config", config);
 	}
 
 	@At
@@ -82,6 +89,33 @@ public class APMModule extends AbstractBaseModule {
 	@Filters
 	public APMAlarm detail(String code) {
 		return apmAlarmService.fetch(code);
+	}
+
+	@At
+	@RequiresRoles("admin")
+	public Result setting(@Param("type") String type, @Param("types") String types, @Param("percent") String percent) {
+		NutMap data = NutMap.NEW();
+		data.put(type + ".alarm.percent", percent);
+		data.put(type + ".alarm.types", types);
+
+		config.putAll(data);// 更新内存
+
+		Config pConfig = configService.fetch(Cnd.where("name", "=", type + ".alarm.percent"));
+		Config tConfig = configService.fetch(Cnd.where("name", "=", type + ".alarm.types"));
+		if (pConfig == null) {
+			pConfig = new Config();
+			pConfig.setName(type + ".alarm.percent");
+			configService.save(pConfig);
+		}
+		pConfig.setValue(percent);
+		if (tConfig == null) {
+			tConfig = new Config();
+			tConfig.setName(type + ".alarm.types");
+			configService.save(tConfig);
+		}
+		tConfig.setValue(types);
+
+		return configService.update(tConfig) == 1 && configService.update(pConfig) == 1 ? Result.success() : Result.fail("配置失败!"); // 更新数据库
 	}
 
 }

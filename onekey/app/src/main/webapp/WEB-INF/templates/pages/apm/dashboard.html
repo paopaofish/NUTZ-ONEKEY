@@ -82,13 +82,13 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 								<td>当前使用 <i class="red" id="cpu">${obj.data.cpu.total.usage!}%</i>
 								</td>
 
-								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" value="${obj.data.config['cpu.alarm.percent']}" /> 发送 <select multiple=""
+								<td>使用超过 <input type="text" id="cpuAlarmPercent" class="input-sm spinner" value="${obj.data.config['cpu.alarm.percent']}" /> 发送 <select multiple id="cpuAlarmTypes"
 									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
-										<option value="EMAIL">邮件</option>
-										<option value="SMS">短信</option>
-										<option value="WECHAT">微信</option>
+										<option value="EMAIL"${alarmType(obj.data.config['cpu.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
+										<option value="SMS"${alarmType(obj.data.config['cpu.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
+										<option value="WECHAT"${alarmType(obj.data.config['cpu.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
 								</select> 告警
-									<button class="btn btn-sm btn-primary">
+									<button class="btn btn-sm btn-primary" onclick="setAlarm('cpu')">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
 									</button>
 								</td>
@@ -100,13 +100,13 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 								<td>当前使用 <i class="red" id="jvm">${obj.data.memory.jvm.usage!}%</i>
 								</td>
 
-								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" value="${obj.data.config['jvm.alarm.percent']}" /> 发送 <select multiple=""
+								<td>使用超过 <input type="text" id="jvmAlarmPercent" class="input-sm spinner" value="${obj.data.config['jvm.alarm.percent']}" /> 发送 <select multiple="" id="jvmAlarmTypes"
 									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
-										<option value="EMAIL">邮件</option>
-										<option value="SMS">短信</option>
-										<option value="WECHAT">微信</option>
+										<option value="EMAIL"${alarmType(obj.data.config['jvm.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
+										<option value="SMS"${alarmType(obj.data.config['jvm.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
+										<option value="WECHAT"${alarmType(obj.data.config['jvm.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
 								</select> 告警
-									<button class="btn btn-sm btn-primary">
+									<button class="btn btn-sm btn-primary" onclick="setAlarm('jvm')">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
 									</button>
 								</td>
@@ -118,13 +118,13 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 								<td>当前使用 <i class="red" id="ram">${obj.data.memory.ram.usage!}%</i>
 								</td>
 
-								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" value="${obj.data.config['ram.alarm.percent']}" /> 发送 <select multiple=""
+								<td>使用超过 <input type="text" id="ramAlarmPercent" class="input-sm spinner" value="${obj.data.config['ram.alarm.percent']}" /> 发送 <select multiple="" id="ramAlarmTypes"
 									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
-										<option value="EMAIL">邮件</option>
-										<option value="SMS">短信</option>
-										<option value="WECHAT">微信</option>
+										<option value="EMAIL"${alarmType(obj.data.config['ram.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
+										<option value="SMS"${alarmType(obj.data.config['ram.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
+										<option value="WECHAT"${alarmType(obj.data.config['ram.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
 								</select> 告警
-									<button class="btn btn-sm btn-primary">
+									<button class="btn btn-sm btn-primary" onclick="setAlarm('ram')">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
 									</button>
 								</td>
@@ -136,13 +136,13 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 								<td>当前使用 <i class="red" id="swap">${obj.data.memory.swap.usage!}%</i>
 								</td>
 
-								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" value="${obj.data.config['swap.alarm.percent']}" /> 发送 <select multiple=""
+								<td>使用超过 <input type="text" id="swapAlarmPercent" class="input-sm spinner" value="${obj.data.config['swap.alarm.percent']}" /> 发送 <select multiple="" id="swapAlarmTypes"
 									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
-										<option value="EMAIL">邮件</option>
-										<option value="SMS">短信</option>
-										<option value="WECHAT">微信</option>
+										<option value="EMAIL"${alarmType(obj.data.config['swap.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
+										<option value="SMS"${alarmType(obj.data.config['swap.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
+										<option value="WECHAT"${alarmType(obj.data.config['swap.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
 								</select> 告警
-									<button class="btn btn-sm btn-primary">
+									<button class="btn btn-sm btn-primary" onclick="setAlarm('swap')">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
 									</button>
 								</td>
@@ -154,13 +154,13 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 								<td>当前使用 <i class="red">95%</i>
 								</td>
 
-								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" value="${obj.data.config['disk.alarm.percent']}" /> 发送 <select multiple=""
+								<td>使用超过 <input type="text" id="diskAlarmPercent" class="input-sm spinner" value="${obj.data.config['disk.alarm.percent']}" /> 发送 <select multiple="" id="diskAlarmTypes"
 									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
-										<option value="EMAIL">邮件</option>
-										<option value="SMS">短信</option>
-										<option value="WECHAT">微信</option>
+										<option value="EMAIL"${alarmType(obj.data.config['disk.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
+										<option value="SMS"${alarmType(obj.data.config['disk.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
+										<option value="WECHAT"${alarmType(obj.data.config['disk.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
 								</select> 告警
-									<button class="btn btn-sm btn-primary">
+									<button class="btn btn-sm btn-primary" onclick="setAlarm('disk')">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
 									</button>
 								</td>
@@ -172,13 +172,13 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 								<td>当前使用 <i class="red" id="network">${obj.data.network.rate!} M/s</i>
 								</td>
 
-								<td>使用超过 <input type="text" id="spinner3" class="input-sm spinner" value="${obj.data.config['network.alarm.percent']}" /> 发送 <select multiple=""
+								<td>使用超过 <input type="text" id="networkAlarmPercent" class="input-sm spinner" value="${obj.data.config['network.alarm.percent']}" /> 发送 <select multiple="" id="networkAlarmTypes"
 									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
-										<option value="EMAIL">邮件</option>
-										<option value="SMS">短信</option>
-										<option value="WECHAT">微信</option>
+										<option value="EMAIL"${alarmType(obj.data.config['network.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
+										<option value="SMS"${alarmType(obj.data.config['network.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
+										<option value="WECHAT"${alarmType(obj.data.config['network.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
 								</select> 告警
-									<button class="btn btn-sm btn-primary">
+									<button class="btn btn-sm btn-primary" onclick="setAlarm('network')">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
 									</button>
 								</td>
@@ -279,10 +279,25 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 <script src="${base!}/resources/ace/js/jquery.fullscreen.js"></script>
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.0.0.js"></script>
 <script type="text/javascript">
+	function setAlarm(type) {
+		console.log(1);
+		var percent = $('#' + type + 'AlarmPercent').val();
+		var types = $('#' + type + 'AlarmTypes').val();
+		$.post(getRootPath() + '/apm/setting', {
+			type : type,
+			percent : percent,
+			types : types.join()
+		}, function(result) {
+			if (result.operationState == 'SUCCESS') {
+				showMessage('设置成功!');
+			} else {
+				showMessage(result.data.reason);
+			}
+		}, 'json')
+	}
 	var line;
 	var gauge;
 	$('.fa-expand').on('click', function() {
-		console.log(line.getWidth() + ' > ' + line.getHeight());
 		setTimeout(function() {
 			line.resize();
 			gauge.resize();
