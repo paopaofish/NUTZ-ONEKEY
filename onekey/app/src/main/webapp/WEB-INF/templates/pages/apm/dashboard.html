@@ -136,8 +136,8 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 								<td>当前使用 <i class="red" id="swap">${obj.data.memory.swap.usage!}%</i>
 								</td>
 
-								<td>使用超过 <input type="text" id="swapAlarmPercent" class="input-sm spinner" value="${obj.data.config['swap.alarm.percent']}" /> 发送 <select multiple="" id="swapAlarmTypes"
-									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
+								<td>使用超过 <input type="text" id="swapAlarmPercent" class="input-sm spinner" value="${obj.data.config['swap.alarm.percent']}" /> 发送 <select multiple=""
+									id="swapAlarmTypes" class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
 										<option value="EMAIL"${alarmType(obj.data.config['swap.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
 										<option value="SMS"${alarmType(obj.data.config['swap.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
 										<option value="WECHAT"${alarmType(obj.data.config['swap.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
@@ -154,8 +154,8 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 								<td>当前使用 <i class="red">95%</i>
 								</td>
 
-								<td>使用超过 <input type="text" id="diskAlarmPercent" class="input-sm spinner" value="${obj.data.config['disk.alarm.percent']}" /> 发送 <select multiple="" id="diskAlarmTypes"
-									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
+								<td>使用超过 <input type="text" id="diskAlarmPercent" class="input-sm spinner" value="${obj.data.config['disk.alarm.percent']}" /> 发送 <select multiple=""
+									id="diskAlarmTypes" class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
 										<option value="EMAIL"${alarmType(obj.data.config['disk.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
 										<option value="SMS"${alarmType(obj.data.config['disk.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
 										<option value="WECHAT"${alarmType(obj.data.config['disk.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
@@ -172,8 +172,8 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 								<td>当前使用 <i class="red" id="network">${obj.data.network.rate!} M/s</i>
 								</td>
 
-								<td>使用超过 <input type="text" id="networkAlarmPercent" class="input-sm spinner" value="${obj.data.config['network.alarm.percent']}" /> 发送 <select multiple="" id="networkAlarmTypes"
-									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
+								<td>使用超过 <input type="text" id="networkAlarmPercent" class="input-sm spinner" value="${obj.data.config['network.alarm.percent']}" /> 发送 <select multiple=""
+									id="networkAlarmTypes" class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
 										<option value="EMAIL"${alarmType(obj.data.config['network.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
 										<option value="SMS"${alarmType(obj.data.config['network.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
 										<option value="WECHAT"${alarmType(obj.data.config['network.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
@@ -277,7 +277,7 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 <script src="${base!}/resources/ace/js/fuelux/fuelux.spinner.js"></script>
 <script src="${base!}/resources/ace/js/chosen.jquery.js"></script>
 <script src="${base!}/resources/ace/js/jquery.fullscreen.js"></script>
-<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.0.0.js"></script>
+<script src="${base!}/resources/js/echarts.min.js"></script>
 <script type="text/javascript">
 	function setAlarm(type) {
 		console.log(1);
