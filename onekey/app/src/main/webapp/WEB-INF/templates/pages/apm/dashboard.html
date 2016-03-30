@@ -280,7 +280,6 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 <script src="${base!}/resources/js/echarts.min.js"></script>
 <script type="text/javascript">
 	function setAlarm(type) {
-		console.log(1);
 		var percent = $('#' + type + 'AlarmPercent').val();
 		var types = $('#' + type + 'AlarmTypes').val();
 		$.post(getRootPath() + '/apm/setting', {
@@ -301,7 +300,6 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 		setTimeout(function() {
 			line.resize();
 			gauge.resize();
-			console.log(line.getWidth() + ' > ' + line.getHeight());
 		}, 1000);
 	});
 	$(function() {
@@ -389,11 +387,7 @@ layout("/layout/default.html",{"menu":[nameSpace,"apm"],"breadcrumbs":[{"name":"
 			} ]
 		};
 		if (option && typeof option === "object") {
-			var startTime = +new Date();
 			line.setOption(option, true);
-			var endTime = +new Date();
-			var updateTime = endTime - startTime;
-			console.log("Time used:", updateTime);
 		}
 
 		gauge = echarts.init($('#gauge')[0]);
