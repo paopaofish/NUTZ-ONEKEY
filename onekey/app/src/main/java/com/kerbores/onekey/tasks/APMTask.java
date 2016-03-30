@@ -20,12 +20,12 @@ import org.nutz.log.Log;
 import org.nutz.log.Logs;
 import org.nutz.weixin.bean.WxTemplateData;
 import org.nutz.weixin.spi.WxApi2;
-import org.nutz.weixin.spi.WxResp;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import com.kerbores.onekey.biz.acl.UserService;
+import com.kerbores.onekey.biz.email.EmailService;
 import com.kerbores.onkey.bean.acl.User;
 import com.kerbores.onkey.bean.apm.APMAlarm;
 import com.kerbores.onkey.bean.apm.APMAlarm.Type;
@@ -59,6 +59,9 @@ public class APMTask implements Job {
 
 	@Inject
 	UserService userService;
+
+	@Inject
+	EmailService emailService;
 
 	/**
 	 * 
@@ -142,7 +145,7 @@ public class APMTask implements Job {
 			@Override
 			public void invoke(int index, String type, int length) throws ExitLoop, ContinueLoop, LoopException {
 				if (Strings.equals(type, "EMAIL")) {// 发送邮件
-
+					sendALarmByEmail(listener, alarm);
 				}
 				if (Strings.equals(type, "SMS")) {// 发送短信
 
@@ -150,8 +153,8 @@ public class APMTask implements Job {
 				if (Strings.equals(type, "WECHAT")) {// 发送微信消息
 					sendAlarmByWechat(listener, alarm);
 				}
-
 			}
+
 		});
 
 		if (dao == null) {
@@ -159,6 +162,21 @@ public class APMTask implements Job {
 		} else {
 			dao.insert(alarm);
 		}
+	}
+
+	private void sendALarmByEmail(String listener, final APMAlarm alarm) {
+		Lang.each(listener.split(","), new Each<String>() {
+
+			@Override
+			public void invoke(int index, String toUser, int length) throws ExitLoop, ContinueLoop, LoopException {
+				User user = userService.fetch(Cnd.where("name", "=", toUser));
+				if (user == null) {
+					return;
+				}
+				emailService.sendAlarm(alarm, user.getEmail());
+			}
+		});
+
 	}
 
 	/**
@@ -180,8 +198,7 @@ public class APMTask implements Job {
 				if (user == null) {
 					return;
 				}
-				WxResp resp = api.template_send(user.getOpenid(), "MnNkTihmclGa4OAFelkMwAwxUiKu41hsn2l9fHxLRdA", null, data);
-				System.err.println(resp);
+				LOG.debug(api.template_send(user.getOpenid(), "MnNkTihmclGa4OAFelkMwAwxUiKu41hsn2l9fHxLRdA", null, data));
 			}
 		});
 	}

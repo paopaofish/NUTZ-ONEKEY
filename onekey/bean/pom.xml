@@ -7,4 +7,5 @@
   </parent>
   <artifactId>bean</artifactId>
   <build/>
+  <name>模型</name>
 </project>
