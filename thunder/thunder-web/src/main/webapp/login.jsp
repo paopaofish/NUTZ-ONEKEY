@@ -9,7 +9,7 @@
 
 <meta name="description" content="User login page" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-
+<link href="${base}/resources/images/logo.ico" rel="shortcut icon">
 <!-- bootstrap & fontawesome -->
 <link rel="stylesheet" href="${base}/resources/ace/css/bootstrap.css" />
 <link rel="stylesheet" href="${base}/resources/ace/css/font-awesome.css" />
