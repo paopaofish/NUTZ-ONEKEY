@@ -140,8 +140,8 @@ public class APMTask implements Job {
 
 			List<DISKGather> disks = DISKGather.gather(sigar);
 			for (DISKGather disk : disks) {
-				if (disk.getStat().getUsePercent() * 100 > config.getInt("disk.alarm.percent")) {
-					alarm(Type.DISK, "磁盘警告", disk.getConfig().getDevName(), disk.getStat().getUsePercent(), config.getInt("disk.alarm.percent"));
+				if (disk.getStat() != null && disk.getStat().getUsePercent() * 100 > config.getInt("disk.alarm.percent")) {
+					alarm(Type.DISK, "磁盘警告", "DISK", disk.getStat().getUsePercent(), config.getInt("disk.alarm.percent"));
 				}
 			}
 
@@ -149,10 +149,10 @@ public class APMTask implements Job {
 			double niUsage, noUsage;
 			NetInterfaceGather ni = NetInterfaceGather.gather(sigar);
 			if ((niUsage = ni.getRxbps() * 100 / ni.getStat().getSpeed()) > config.getInt("network.alarm.percent")) {
-				alarm(Type.NETWORK, "流量警告", "网卡", niUsage, config.getInt("network.alarm.percent"));
+				alarm(Type.NETWORK, "流量警告", "NETWORK", niUsage, config.getInt("network.alarm.percent"));
 			}
 			if ((noUsage = ni.getTxbps() * 100 / ni.getStat().getSpeed()) > config.getInt("network.alarm.percent")) {
-				alarm(Type.NETWORK, "流量警告", "网卡", noUsage, config.getInt("network.alarm.percent"));
+				alarm(Type.NETWORK, "流量警告", "NETWORK", noUsage, config.getInt("network.alarm.percent"));
 			}
 
 		} catch (SigarException e) {
