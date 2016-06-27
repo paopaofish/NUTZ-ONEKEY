@@ -140,7 +140,7 @@ public class APMTask implements Job {
 
 			List<DISKGather> disks = DISKGather.gather(sigar);
 			for (DISKGather disk : disks) {
-				if (disk.getStat().getUsePercent() * 100 > config.getInt("disk.alarm.percent")) {
+				if (disk.getStat() != null && disk.getStat().getUsePercent() * 100 > config.getInt("disk.alarm.percent")) {
 					alarm(Type.DISK, "磁盘警告", disk.getConfig().getDevName(), disk.getStat().getUsePercent(), config.getInt("disk.alarm.percent"));
 				}
 			}
