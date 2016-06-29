@@ -124,8 +124,10 @@ public class APMTask implements Job {
 			if ((ramUsage = memory.getMem().getUsedPercent()) > config.getInt("ram.alarm.percent")) {
 				alarm(Type.MEM, "内存警告", "RAM", ramUsage, config.getInt("ram.alarm.percent"));
 			}
-			if ((swapUsage = memory.getSwap().getUsed() * 100 / memory.getSwap().getTotal()) > config.getInt("swap.alarm.percent")) {
-				alarm(Type.MEM, "内存警告", "SWAP", swapUsage, config.getInt("swap.alarm.percent"));
+			if (memory.getSwap().getTotal() != 0) {
+				if ((swapUsage = memory.getSwap().getUsed() * 100 / memory.getSwap().getTotal()) > config.getInt("swap.alarm.percent")) {
+					alarm(Type.MEM, "内存警告", "SWAP", swapUsage, config.getInt("swap.alarm.percent"));
+				}
 			}
 
 			CPUGather cpu = CPUGather.gather(sigar);
