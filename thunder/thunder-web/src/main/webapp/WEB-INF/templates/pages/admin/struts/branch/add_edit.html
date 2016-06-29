@@ -62,7 +62,7 @@ layout("/layout/default.html",{"menu":["struts","branch_admin"],"breadcrumbs":[{
 							<select class="form-control" name="principalId">
 								<option value="0">请选择机构负责人</option>
 								<!--# for(user in obj.data.users){  #-->
-								<option value="${user.id!}" ${user.id == obj.data.branch.principalId ? 'selected' : ''}>${user.realName!}</option>
+								<option value="${user.id!}" ${user.id == obj.data.branch.principalId! ? 'selected' : ''}>${user.realName!}</option>
 								<!--# } #-->
 							</select>
 						</div>
