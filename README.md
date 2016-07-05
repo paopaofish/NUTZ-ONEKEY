@@ -7,7 +7,7 @@ NUTZ一键脚手架
 		<repository>
 			<id>dgj nexus</id>
 			<name>Team Nexus Repository</name>
-			<url>http://maven.kerbores.com:11981/nexus/content/groups/public</url>
+			<url>http://maven.kerbores.com/nexus/content/groups/public</url>
 		</repository>
 	</repositories>
 ```
